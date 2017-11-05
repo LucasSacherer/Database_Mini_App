@@ -22,7 +22,7 @@ public class DatabaseSetup {
 
     public boolean initialSetup(){
         try {
-            Connection con = DriverManager.getConnection("jdbc:derby:mini-app");
+            Connection con = DriverManager.getConnection("jdbc:derby:mini-app;create=true");
             Statement stmt = con.createStatement();
             try {
                 stmt.executeUpdate("DROP TABLE node");
