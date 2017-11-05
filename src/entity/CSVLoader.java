@@ -29,7 +29,12 @@ public class CSVLoader {
 
         Reader in = new FileReader(filePath);
         Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
+
         for (CSVRecord record: records){
+            //check if the file is a node file
+            if (record.size() != 9) {
+                throw new IOException();
+            }
 
             //here just to make clear what each value means
             String nodeID = record.get(0);
@@ -62,4 +67,36 @@ public class CSVLoader {
 
         return content;
     }
+
+    public ArrayList<String[]> loadEdgeCSVFile (String filePath) throws IOException{
+        ArrayList<String[]> content = new ArrayList<>();
+
+        Reader in = new FileReader(filePath);
+        Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
+        for (CSVRecord record: records){
+            //check if the file is a edge file
+            if (record.size() != 3) {
+                throw new IOException();
+            }
+
+            //here just to make clear what each value means
+            String edgeID = record.get(0);
+            String startNode = record.get(1);
+            String endNode = record.get(2);
+
+            String[] values = new String[3];
+            values[0] = edgeID;
+            values[1] = startNode;
+            values[2] = endNode;
+
+            content.add(values);
+        }
+        //remove the first line since it's the titles
+        content.remove(0);
+
+        in.close();
+
+        return content;
+    }
+
 }

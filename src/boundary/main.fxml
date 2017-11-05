@@ -133,7 +133,7 @@
                <children>
                   <Label text="Select Edge:" GridPane.halignment="RIGHT" />
                   <Button mnemonicParsing="false" text="Update Edge" GridPane.columnIndex="2" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1">
+                  <ComboBox fx:id="edgeComboBox" onAction="#edgeComboBoxChange" prefWidth="150.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
@@ -152,8 +152,8 @@
                <children>
                   <Label text="startNode" GridPane.halignment="CENTER" />
                   <Label text="endNode" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                  <TextField GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtStartNode" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtEndNode" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>

@@ -29,6 +29,8 @@ public class MainController {
     //combo boxes
     @FXML
     private ComboBox<String> nodeComboBox;
+    @FXML
+    private ComboBox<String> edgeComboBox;
 
     //labels
     @FXML
@@ -53,6 +55,10 @@ public class MainController {
     private TextField txtShortName;
     @FXML
     private TextField txtTeamAssigned;
+    @FXML
+    private TextField txtStartNode;
+    @FXML
+    private TextField txtEndNode;
 
     //controller methods
     @FXML
@@ -80,7 +86,8 @@ public class MainController {
         try{
             content = fileLoader.loadNodeCSVFile(filePath);
         }catch (IOException ex){
-            System.out.println("Failed to read file!");
+            System.out.println("This file is not a Node file!");
+            nodeFileName.setText("This is not a Node file! Select a new Node file");
             ex.printStackTrace();
             return;
         }
@@ -114,7 +121,50 @@ public class MainController {
 
     @FXML
     private void loadEdgeFile(ActionEvent e){
-        //TODO: do the same thing as the loadNodeFile method but for edges
+        String filePath = edgeFileName.getText();
+
+        //checks if the file is a CSV file
+        if(!fileLoader.isValidCSV(filePath)){
+            //not a valid CSV file
+            return; //should probably do something here
+        }
+
+        //gets the content out of the CSV file
+        ArrayList<String[]> content;
+        try{
+            content = fileLoader.loadEdgeCSVFile(filePath);
+        }catch (IOException ex){
+            System.out.println("This is not an Edge file!");
+            edgeFileName.setText("This is not an Edge file! Select a new Edge file");
+            ex.printStackTrace();
+            return;
+        }
+
+        //tries to put the content into the database
+        try {
+            inserter.insertEdges(content);
+        }catch (SQLException ex){
+            System.out.println("Failed to insert csv into database!");
+            ex.printStackTrace();
+            return;
+        }
+
+        //updates the data class
+        try{
+            data.updateEdges();
+        }catch (SQLException ex){
+            System.out.println("Failed to get edges out of the database!");
+            ex.printStackTrace();
+            return;
+        }
+
+        //updates the menu
+        ArrayList<String> ids = data.getEdgeIDs();
+        edgeComboBox.getItems().clear();
+        edgeComboBox.getItems().addAll(ids);
+        if(ids.size() > 0){
+            edgeComboBox.setValue(ids.get(0));
+        }
     }
 
     @FXML
@@ -134,5 +184,18 @@ public class MainController {
         txtLongName.setText(newNode.getLongName());
         txtShortName.setText(newNode.getShortName());
         txtTeamAssigned.setText(newNode.getTeamAssigned());
+    }
+
+    @FXML
+    private void edgeComboBoxChange(ActionEvent e){
+        String selectedValue = edgeComboBox.getSelectionModel().getSelectedItem();
+        if (selectedValue == null){
+            //nothing is selected
+            return;
+        }
+
+        Edge newEdge = data.getEdge(selectedValue);
+        txtStartNode.setText(newEdge.getStartNode());
+        txtEndNode.setText(newEdge.getEndNode());
     }
 }

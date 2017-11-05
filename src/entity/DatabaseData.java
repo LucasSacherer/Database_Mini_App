@@ -41,6 +41,26 @@ public class DatabaseData {
         con.close();
     }
 
+    public void updateEdges() throws SQLException{
+        edges.clear();
+
+        Connection con = DriverManager.getConnection("jdbc:derby:mini-app");
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM EDGE");
+
+        while(rs.next()){
+            String edgeID = rs.getString("EDGEID");
+            String startNode = rs.getString("STARTNODE");
+            String endNode = rs.getString("ENDNODE");
+
+            edges.put(edgeID, new Edge(edgeID, startNode, endNode));
+        }
+
+        rs.close();
+        stmt.close();
+        con.close();
+    }
+
     public ArrayList<String> getNodeIDs(){
         ArrayList<String> IDs = new ArrayList<>();
         Set<String> keys = nodes.keySet();
@@ -49,7 +69,19 @@ public class DatabaseData {
         return IDs;
     }
 
+    public ArrayList<String> getEdgeIDs(){
+        ArrayList<String> IDs = new ArrayList<>();
+        Set<String> keys = edges.keySet();
+
+        IDs.addAll(keys);
+        return IDs;
+    }
+
     public Node getNode(String nodeID){
         return nodes.get(nodeID);
+    }
+
+    public Edge getEdge(String nodeID){
+        return edges.get(nodeID);
     }
 }
