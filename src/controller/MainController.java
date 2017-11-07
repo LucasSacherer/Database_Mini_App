@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -15,6 +16,8 @@ public class MainController {
     final private CSVLoader fileLoader = new CSVLoader();
     final private DatabaseInserter inserter = new DatabaseInserter();
     final private DatabaseData data = new DatabaseData();
+    final private CSVSaver saver = new CSVSaver();
+
 
     //buttons
     @FXML
@@ -25,6 +28,10 @@ public class MainController {
     private Button btnNodeLoad;
     @FXML
     private Button btnEdgeLoad;
+    @FXML
+    private Button btnNodeSave;
+    @FXML
+    private Button btnEdgeSave;
 
     //combo boxes
     @FXML
@@ -197,5 +204,40 @@ public class MainController {
         Edge newEdge = data.getEdge(selectedValue);
         txtStartNode.setText(newEdge.getStartNode());
         txtEndNode.setText(newEdge.getEndNode());
+    }
+
+    @FXML
+    private void saveNodeFile(ActionEvent e){
+        String filePath = nodeFileName.getText();
+        try{
+            saver.saveNodeResultSet(filePath);
+        }catch(SQLException ex){
+            System.out.println("Failed to get from Database");
+            ex.printStackTrace();
+            return;
+        }catch (IOException ex){
+            System.out.println("Cannot Close the File or get Headers");
+            ex.printStackTrace();
+            return;
+        }
+
+
+}
+
+    @FXML
+    private void saveEdgeFile(ActionEvent e){
+        String filePath = edgeFileName.getText();
+        try{
+            saver.saveEdgeResultSet(filePath);
+        }catch(SQLException ex){
+            System.out.println("Failed to get from Database");
+            ex.printStackTrace();
+            return;
+        }catch (IOException ex){
+            System.out.println("Cannot Close the File or get Headers");
+            ex.printStackTrace();
+            return;
+        }
+
     }
 }
