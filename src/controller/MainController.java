@@ -25,6 +25,14 @@ public class MainController {
     private Button btnNodeLoad;
     @FXML
     private Button btnEdgeLoad;
+    @FXML
+    private Button btnUpdateNode;
+    @FXML
+    private Button btnUpdateEdge;
+    @FXML
+    private Button btnSaveNodes;
+    @FXML
+    private Button btnSaveEdges;
 
     //combo boxes
     @FXML
@@ -198,4 +206,80 @@ public class MainController {
         txtStartNode.setText(newEdge.getStartNode());
         txtEndNode.setText(newEdge.getEndNode());
     }
+
+    @FXML
+    private void nodeUpdate(ActionEvent e){
+        String selectedValue = nodeComboBox.getSelectionModel().getSelectedItem();
+        if (selectedValue == null){
+            //nothing is selected
+            return;
+        }
+
+        String selectedX = txtXcoord.getText();
+        String selectedY = txtYcoord.getText();
+        String selectedFloor = txtFloor.getText();
+        String selectedBuilding = txtBuilding.getText();
+        String selectedType = txtNodeType.getText();
+        String selectedLName = txtLongName.getText();
+        String selectedSName = txtShortName.getText();
+        String selectedTeamAssigned = txtTeamAssigned.getText();
+
+        Node updatedNode = new Node(selectedValue, selectedX, selectedY, selectedFloor, selectedBuilding, selectedType,
+                selectedLName, selectedSName, selectedTeamAssigned);
+
+        //send database sql update
+        try {
+            data.modifyNode(updatedNode);
+        } catch (SQLException e1) {
+            System.out.println("failed to modify node");
+            e1.printStackTrace();
+        }
+
+        try {
+            data.updateNodes();
+        } catch (SQLException e1) {
+            System.out.println("failed to updates Nodes after modifying node");
+            e1.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void edgeUpdate(ActionEvent e){
+        String selectedValue = edgeComboBox.getSelectionModel().getSelectedItem();
+        if (selectedValue == null){
+            //nothing is selected
+            return;
+        }
+
+        String selectedStart = txtStartNode.getText();
+        String selectedEnd = txtEndNode.getText();
+
+        Edge updatedEdge = new Edge(selectedValue, selectedStart, selectedEnd);
+
+        //send database sql update
+        try {
+            data.modifyEdge(updatedEdge);
+        } catch (SQLException e1) {
+            System.out.println("failed to modify edge");
+            e1.printStackTrace();
+        }
+
+        try {
+            data.updateEdges();
+        } catch (SQLException e1) {
+            System.out.println("failed to updates edges after modifying edge");
+            e1.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void saveNodeFile(ActionEvent e){
+
+    }
+
+    @FXML
+    private void saveEdgeFile(ActionEvent e){
+
+    }
+
 }
