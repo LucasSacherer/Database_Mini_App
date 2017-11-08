@@ -33,7 +33,7 @@
       <DataType>VARCHAR(20)|12</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="18" parent="13" name="SQL171104151035550">
+    <key id="18" parent="13" name="SQL171107141212370">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>EDGEID</ColNames>
       <Primary>1</Primary>
@@ -83,7 +83,7 @@
       <DataType>VARCHAR(10)|12</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="28" parent="14" name="SQL171104151035510">
+    <key id="28" parent="14" name="SQL171107141212330">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>NODEID</ColNames>
       <Primary>1</Primary>

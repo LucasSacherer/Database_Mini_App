@@ -41,6 +41,32 @@ public class DatabaseData {
         con.close();
     }
 
+    public void modifyNode(Node n) throws SQLException{
+        Connection con = DriverManager.getConnection("jdbc:derby:mini-app");
+        Statement stmt = con.createStatement();
+        stmt.executeUpdate("UPDATE NODE SET xcoord = '"+n.getXcoord()+
+                "', ycoord = '"+n.getYcoord()+
+                "', floor = '"+n.getFloor()+
+                "', building = '"+n.getBuilding()+
+                "', nodeType = '"+n.getNodeType()+
+                "', longName = '"+n.getLongName()+
+                "', shortName = '"+n.getShortName()+
+                "', teamAssigned = '"+n.getTeamAssigned()+
+                "' WHERE nodeID = '"+n.getNodeID()+"'");
+        stmt.close();
+        con.close();
+    }
+
+    public void modifyEdge(Edge e) throws SQLException{
+        Connection con = DriverManager.getConnection("jdbc:derby:mini-app");
+        Statement stmt = con.createStatement();
+        stmt.executeUpdate("UPDATE EDGE SET startNode = '"+e.getStartNode()+
+                "', endNode = '"+e.getEndNode()+
+                "' WHERE edgeID = '"+e.getEdgeID()+"'");
+        stmt.close();
+        con.close();
+    }
+
     public void updateEdges() throws SQLException{
         edges.clear();
 
