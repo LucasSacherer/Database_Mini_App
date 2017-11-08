@@ -8,7 +8,11 @@ import java.util.ArrayList;
 
 public class DatabaseInserter {
 
+    final DatabaseSetup setup = new DatabaseSetup();
+
     public void insertNodes(ArrayList<String[]> content) throws SQLException{
+
+        setup.setupNodes(); // resets the node table
 
         Connection con = DriverManager.getConnection("jdbc:derby:mini-app");
         Statement stmt = con.createStatement();
@@ -30,6 +34,8 @@ public class DatabaseInserter {
     }
 
     public void insertEdges(ArrayList<String[]> content) throws SQLException{
+
+        setup.setupEdges(); //rests the edge table
 
         Connection con = DriverManager.getConnection("jdbc:derby:mini-app");
         Statement stmt = con.createStatement();
