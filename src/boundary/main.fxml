@@ -48,7 +48,7 @@
                   <Button fx:id="btnNodeSelect" mnemonicParsing="false" onAction="#selectNodeFile" text="Select Node File" GridPane.halignment="CENTER" />
                   <Label fx:id="nodeFileName" prefWidth="400.0" text="?" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                   <Button fx:id="btnNodeLoad" mnemonicParsing="false" onAction="#loadNodeFile" text="Load From File" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                  <Button fx:id="btnSaveNodes" mnemonicParsing="false" onAction="#saveNodeFile" text="Save To File" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                  <Button fx:id="btnNodeSave" mnemonicParsing="false" onAction="#saveNodeFile" text="Save To File" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
             <GridPane GridPane.rowIndex="8">
@@ -65,7 +65,7 @@
                   <Button fx:id="btnEdgeSelect" mnemonicParsing="false" onAction="#selectEdgeFile" text="Select Edge File" GridPane.halignment="CENTER" />
                   <Label fx:id="edgeFileName" prefWidth="400.0" text="?" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                   <Button fx:id="btnEdgeLoad" mnemonicParsing="false" onAction="#loadEdgeFile" text="Load From File" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                  <Button fx:id="btnSaveEdges" mnemonicParsing="false" onAction="#saveEdgeFile" text="Save To File" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                  <Button fx:id="btnEdgeSave" mnemonicParsing="false" onAction="#saveEdgeFile" text="Save To File" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
             <GridPane GridPane.rowIndex="2">
