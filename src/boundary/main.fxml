@@ -79,7 +79,7 @@
               </rowConstraints>
                <children>
                   <Label text="Select Node:" GridPane.halignment="RIGHT" />
-                  <Button mnemonicParsing="false" text="Update Node" GridPane.columnIndex="2" />
+                  <Button fx:id="btnUpdateNode" mnemonicParsing="false" onAction="#nodeUpdate" text="Update Node" GridPane.columnIndex="2" />
                   <ComboBox fx:id="nodeComboBox" onAction="#nodeComboBoxChange" prefWidth="150.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="20.0" />
@@ -132,7 +132,7 @@
                </rowConstraints>
                <children>
                   <Label text="Select Edge:" GridPane.halignment="RIGHT" />
-                  <Button mnemonicParsing="false" text="Update Edge" GridPane.columnIndex="2" />
+                  <Button fx:id="btnUpdateEdge" mnemonicParsing="false" onAction="#edgeUpdate" text="Update Edge" GridPane.columnIndex="2" />
                   <ComboBox fx:id="edgeComboBox" onAction="#edgeComboBoxChange" prefWidth="150.0" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="20.0" />

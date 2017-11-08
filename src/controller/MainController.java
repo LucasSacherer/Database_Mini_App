@@ -192,7 +192,7 @@ public class MainController {
         txtYcoord.setText(newNode.getYcoord());
         txtFloor.setText(newNode.getFloor());
         txtBuilding.setText(newNode.getBuilding());
-        txtNodeType.setText(newNode.getNodeID());
+        txtNodeType.setText(newNode.getNodeType());
         txtLongName.setText(newNode.getLongName());
         txtShortName.setText(newNode.getShortName());
         txtTeamAssigned.setText(newNode.getTeamAssigned());
