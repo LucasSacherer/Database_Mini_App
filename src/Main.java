@@ -13,7 +13,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         //makes sure that the database is setup
-        if (!(setup.loadDriver()&&setup.initialSetup())){
+        if (!(setup.loadDriver()&&setup.setupNodes()&&setup.setupEdges())){
             //driver or database setup failed
             System.out.println("Failed to setup database!");
         }

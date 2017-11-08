@@ -20,17 +20,38 @@ public class DatabaseSetup {
         }
     }
 
-    public boolean initialSetup(){
+    public boolean setupEdges(){
+        try {
+            Connection con = DriverManager.getConnection("jdbc:derby:mini-app;create=true");
+            Statement stmt = con.createStatement();
+
+            try {
+                stmt.executeUpdate("DROP TABLE edge");
+            }catch (SQLException ex){
+                //table does not exist
+            }
+
+            stmt.execute("CREATE TABLE edge (\n" +
+                    " edgeID vARCHAR(30) PRIMARY KEY,\n" +
+                    " startNode varchar(20) NOT NULL,\n" +
+                    " endNode varchar(20) NOT NULL\n" +
+                    ")");
+
+            stmt.close();
+            con.close();
+            return true;
+        }catch (SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean setupNodes(){
         try {
             Connection con = DriverManager.getConnection("jdbc:derby:mini-app;create=true");
             Statement stmt = con.createStatement();
             try {
                 stmt.executeUpdate("DROP TABLE node");
-            }catch (SQLException ex){
-                //table does not exist
-            }
-            try {
-                stmt.executeUpdate("DROP TABLE edge");
             }catch (SQLException ex){
                 //table does not exist
             }
@@ -45,11 +66,6 @@ public class DatabaseSetup {
                     " longName varchar(30) NOT NULL,\n" +
                     " shortName varchar(20) NOT NULL,\n" +
                     " teamAssigned varchar(10) NOT NULL\n" +
-                    ")");
-            stmt.execute("CREATE TABLE edge (\n" +
-                    " edgeID vARCHAR(30) PRIMARY KEY,\n" +
-                    " startNode varchar(20) NOT NULL,\n" +
-                    " endNode varchar(20) NOT NULL\n" +
                     ")");
 
             stmt.close();
